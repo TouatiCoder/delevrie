@@ -1,7 +1,10 @@
+// src/App.tsx
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Providers from './context/Providers';
 import ProtectedRoute from './components/ProtectedRoute';
+
+// Layouts
 import VisitorLayout from './layouts/VisitorLayout';
 import AdminLayout from './layouts/AdminLayout';
 import ClientLayout from './layouts/ClientLayout';
@@ -36,48 +39,200 @@ import LivreurOrdersPage from './pages/livreur/OrdersPage';
 import EarningsPage from './pages/livreur/EarningsPage';
 import LivreurProfilePage from './pages/livreur/ProfilePage';
 
-// Design System
-// import DesignSystemShowcase from './pages/DesignSystemShowcase'; // This component doesn't exist
-
 const App: React.FC = () => {
   return (
-    <Providers>
-      <Router>
+    <Router>
+      <Providers>
         <Routes>
-        {/* Visitor routes */}
-        <Route path="/" element={<VisitorLayout><HomePage /></VisitorLayout>} />
-        <Route path="/pricing" element={<VisitorLayout><PricingPage /></VisitorLayout>} />
-        <Route path="/services" element={<VisitorLayout><ServicesPage /></VisitorLayout>} />
-        <Route path="/about" element={<VisitorLayout><AboutPage /></VisitorLayout>} />
-        <Route path="/contact" element={<VisitorLayout><ContactPage /></VisitorLayout>} />
+          {/* VISITOR ROUTES */}
+          <Route
+            path="/"
+            element={
+              <VisitorLayout>
+                <HomePage />
+              </VisitorLayout>
+            }
+          />
+          <Route
+            path="/pricing"
+            element={
+              <VisitorLayout>
+                <PricingPage />
+              </VisitorLayout>
+            }
+          />
+          <Route
+            path="/services"
+            element={
+              <VisitorLayout>
+                <ServicesPage />
+              </VisitorLayout>
+            }
+          />
+          <Route
+            path="/about"
+            element={
+              <VisitorLayout>
+                <AboutPage />
+              </VisitorLayout>
+            }
+          />
+          <Route
+            path="/contact"
+            element={
+              <VisitorLayout>
+                <ContactPage />
+              </VisitorLayout>
+            }
+          />
 
-        {/* Admin routes */}
-        <Route path="/admin/login" element={<AdminLoginPage />} />
-        <Route path="/admin" element={<ProtectedRoute requiredRole="admin"><AdminLayout><AdminDashboardPage /></AdminLayout></ProtectedRoute>} />
-        <Route path="/admin/cities" element={<ProtectedRoute requiredRole="admin"><AdminLayout><CitiesPage /></AdminLayout></ProtectedRoute>} />
-        <Route path="/admin/orders" element={<ProtectedRoute requiredRole="admin"><AdminLayout><OrdersPage /></AdminLayout></ProtectedRoute>} />
-        <Route path="/admin/clients" element={<ProtectedRoute requiredRole="admin"><AdminLayout><ClientsPage /></AdminLayout></ProtectedRoute>} />
-        <Route path="/admin/livreurs" element={<ProtectedRoute requiredRole="admin"><AdminLayout><LivreursPage /></AdminLayout></ProtectedRoute>} />
+          {/* ADMIN LOGIN */}
+          <Route path="/admin/login" element={<AdminLoginPage />} />
 
-        {/* Client routes */}
-        <Route path="/client/login" element={<ClientLoginPage />} />
-        <Route path="/client" element={<ProtectedRoute requiredRole="client"><ClientLayout><ClientDashboardPage /></ClientLayout></ProtectedRoute>} />
-        <Route path="/client/orders" element={<ProtectedRoute requiredRole="client"><ClientLayout><ClientOrdersPage /></ClientLayout></ProtectedRoute>} />
-        <Route path="/client/create-order" element={<ProtectedRoute requiredRole="client"><ClientLayout><CreateOrderPage /></ClientLayout></ProtectedRoute>} />
-        <Route path="/client/profile" element={<ProtectedRoute requiredRole="client"><ClientLayout><ClientProfilePage /></ClientLayout></ProtectedRoute>} />
+          {/* ADMIN PROTECTED ROUTES */}
+          <Route
+            path="/admin"
+            element={
+              <ProtectedRoute requiredRole="admin">
+                <AdminLayout>
+                  <AdminDashboardPage />
+                </AdminLayout>
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin/cities"
+            element={
+              <ProtectedRoute requiredRole="admin">
+                <AdminLayout>
+                  <CitiesPage />
+                </AdminLayout>
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin/orders"
+            element={
+              <ProtectedRoute requiredRole="admin">
+                <AdminLayout>
+                  <OrdersPage />
+                </AdminLayout>
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin/clients"
+            element={
+              <ProtectedRoute requiredRole="admin">
+                <AdminLayout>
+                  <ClientsPage />
+                </AdminLayout>
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin/livreurs"
+            element={
+              <ProtectedRoute requiredRole="admin">
+                <AdminLayout>
+                  <LivreursPage />
+                </AdminLayout>
+              </ProtectedRoute>
+            }
+          />
 
-        {/* Livreur routes */}
-        <Route path="/livreur/login" element={<LivreurLoginPage />} />
-        <Route path="/livreur" element={<ProtectedRoute requiredRole="livreur"><LivreurLayout><LivreurDashboardPage /></LivreurLayout></ProtectedRoute>} />
-        <Route path="/livreur/orders" element={<ProtectedRoute requiredRole="livreur"><LivreurLayout><LivreurOrdersPage /></LivreurLayout></ProtectedRoute>} />
-        <Route path="/livreur/earnings" element={<ProtectedRoute requiredRole="livreur"><LivreurLayout><EarningsPage /></LivreurLayout></ProtectedRoute>} />
-        <Route path="/livreur/profile" element={<ProtectedRoute requiredRole="livreur"><LivreurLayout><LivreurProfilePage /></LivreurLayout></ProtectedRoute>} />
-        
-        {/* Design System */}
-        {/* <Route path="/design-system" element={<DesignSystemShowcase />} /> */}
-      </Routes>
+          {/* CLIENT LOGIN */}
+          <Route path="/client/login" element={<ClientLoginPage />} />
+
+          {/* CLIENT PROTECTED ROUTES */}
+          <Route
+            path="/client"
+            element={
+              <ProtectedRoute requiredRole="client">
+                <ClientLayout>
+                  <ClientDashboardPage />
+                </ClientLayout>
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/client/orders"
+            element={
+              <ProtectedRoute requiredRole="client">
+                <ClientLayout>
+                  <ClientOrdersPage />
+                </ClientLayout>
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/client/create-order"
+            element={
+              <ProtectedRoute requiredRole="client">
+                <ClientLayout>
+                  <CreateOrderPage />
+                </ClientLayout>
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/client/profile"
+            element={
+              <ProtectedRoute requiredRole="client">
+                <ClientLayout>
+                  <ClientProfilePage />
+                </ClientLayout>
+              </ProtectedRoute>
+            }
+          />
+
+          {/* LIVREUR LOGIN */}
+          <Route path="/livreur/login" element={<LivreurLoginPage />} />
+
+          {/* LIVREUR PROTECTED ROUTES */}
+          <Route
+            path="/livreur"
+            element={
+              <ProtectedRoute requiredRole="livreur">
+                <LivreurLayout>
+                  <LivreurDashboardPage />
+                </LivreurLayout>
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/livreur/orders"
+            element={
+              <ProtectedRoute requiredRole="livreur">
+                <LivreurLayout>
+                  <LivreurOrdersPage />
+                </LivreurLayout>
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/livreur/earnings"
+            element={
+              <ProtectedRoute requiredRole="livreur">
+                <LivreurLayout>
+                  <EarningsPage />
+                </LivreurLayout>
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/livreur/profile"
+            element={
+              <ProtectedRoute requiredRole="livreur">
+                <LivreurLayout>
+                  <LivreurProfilePage />
+                </LivreurLayout>
+              </ProtectedRoute>
+            }
+          />
+        </Routes>
+      </Providers>
     </Router>
-  </Providers>
   );
 };
 
