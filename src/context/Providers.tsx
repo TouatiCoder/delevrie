@@ -1,4 +1,3 @@
-// src/context/Providers.tsx
 import React from 'react';
 import { AuthProvider } from './AuthContext';
 import { PricingProvider } from './PricingContext';
@@ -10,7 +9,9 @@ interface ProvidersProps {
 const Providers: React.FC<ProvidersProps> = ({ children }) => {
   return (
     <AuthProvider>
-      <PricingProvider>{children}</PricingProvider>
+      <PricingProvider>
+        {children}
+      </PricingProvider>
     </AuthProvider>
   );
 };

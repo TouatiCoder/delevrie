@@ -1,16 +1,8 @@
-// src/context/AuthContext.tsx
-import React, {
-  createContext,
-  useContext,
-  useState,
-  useEffect,
-} from 'react';
-
-export type UserRole = 'admin' | 'client' | 'livreur';
+import React, { createContext, useContext, useState, useEffect } from 'react';
 
 interface User {
   username: string;
-  role: UserRole;
+  role: string;
 }
 
 interface AuthContextType {
@@ -21,40 +13,48 @@ interface AuthContextType {
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
-// Valid demo credentials
-const VALID_CREDENTIALS: { username: string; password: string; role: UserRole }[] = [
+// Valid credentials
+const VALID_CREDENTIALS = [
   { username: 'admin', password: 'admin123', role: 'admin' },
   { username: 'client', password: 'client123', role: 'client' },
-  { username: 'livreur', password: 'livreur123', role: 'livreur' },
+  { username: 'livreur', password: 'livreur123', role: 'livreur' }
 ];
 
-export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
-  children,
-}) => {
+export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
 
-  // Load existing user from localStorage
+  // Check for existing user in localStorage on initial load
   useEffect(() => {
     const storedUser = localStorage.getItem('user');
     if (storedUser) {
       try {
         setUser(JSON.parse(storedUser));
-      } catch {
+      } catch (e) {
+        // If parsing fails, remove the invalid data
         localStorage.removeItem('user');
       }
     }
   }, []);
 
   const login = (username: string, password: string): boolean => {
-    const cred = VALID_CREDENTIALS.find(
-      (c) => c.username === username && c.password === password
+    // Find matching credentials
+    const credentials = VALID_CREDENTIALS.find(
+      cred => cred.username === username && cred.password === password
     );
-    if (!cred) return false;
 
-    const userData: User = { username: cred.username, role: cred.role };
-    setUser(userData);
-    localStorage.setItem('user', JSON.stringify(userData));
-    return true;
+    if (credentials) {
+      const userData = {
+        username: credentials.username,
+        role: credentials.role
+      };
+      
+      // Store user data in state and localStorage
+      setUser(userData);
+      localStorage.setItem('user', JSON.stringify(userData));
+      return true;
+    }
+    
+    return false;
   };
 
   const logout = () => {
@@ -69,10 +69,10 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   );
 };
 
-export const useAuth = (): AuthContextType => {
-  const ctx = useContext(AuthContext);
-  if (!ctx) {
+export const useAuth = () => {
+  const context = useContext(AuthContext);
+  if (!context) {
     throw new Error('useAuth must be used within an AuthProvider');
   }
-  return ctx;
+  return context;
 };
