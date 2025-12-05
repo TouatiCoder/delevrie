@@ -4,241 +4,165 @@ import { Link } from 'react-router-dom';
 const HomePage: React.FC = () => {
   return (
     <div className="homepage">
-      {/* Hero Section */}
-      <section className="bg-gradient-to-r from-primary to-secondary text-white py-20 md:py-32" aria-labelledby="hero-heading">
-        <div className="container mx-auto px-4 text-center">
-          <h1 id="hero-heading" className="text-4xl md:text-6xl font-bold mb-6 fade-in">
-            Fast & Reliable Delivery Service
+      {/* 1. Section Héros (Hero) - يستخدم تدرج الألوان Dark و Primary مع Secondary كـ Accent */}
+      <section className="bg-gradient-to-r from-dark to-primary text-white py-24 md:py-40" aria-labelledby="hero-heading">
+        <div className="container mx-auto px-4 max-w-7xl">
+          <h1 id="hero-heading" className="text-4xl md:text-7xl font-extrabold mb-6 fade-in tracking-tight">
+            La Logistique de Demain, <span className="text-secondary">Livrée Aujourd'hui.</span>
           </h1>
-          <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto fade-in">
-            Connect with professional couriers and get your packages delivered safely and on time.
+          <p className="text-xl md:text-2xl mb-10 max-w-4xl mx-auto fade-in delay-100 font-light">
+            Des solutions de livraison intelligentes, rapides et écologiques, conçues pour les professionnels exigeants.
           </p>
-          <div className="flex flex-col sm:flex-row justify-center gap-4 fade-in">
+          <div className="flex flex-col sm:flex-row justify-center gap-4 fade-in delay-200">
+            {/* CTA principal - يستخدم اللون الأساسي (Primary) */}
+            <Link 
+              to="/client/create-order" 
+              className="btn btn-primary btn-lg px-10 py-3.5 font-semibold text-lg shadow-soft-xl"
+              aria-label="Créer une nouvelle commande de livraison"
+            >
+              Créer Ma Commande
+            </Link>
+            {/* CTA ثانوي - يستخدم لون الحدود (Outline) الأبيض */}
             <Link 
               to="/services" 
-              className="btn btn-primary text-lg px-8 py-4"
-              aria-label="Explore our delivery services"
+              className="btn btn-outline btn-lg px-10 py-3.5 text-white border-white hover:bg-white hover:text-dark font-semibold text-lg"
+              aria-label="Explorer notre gamme complète de services"
             >
-              Explore Services
-            </Link>
-            <Link 
-              to="/pricing" 
-              className="btn btn-outline text-lg px-8 py-4 bg-white text-primary hover:bg-accent"
-              aria-label="View our pricing plans"
-            >
-              View Pricing
+              Explorer les Services
             </Link>
           </div>
         </div>
       </section>
 
-      {/* How It Works */}
-      <section className="section bg-gray-50" aria-labelledby="how-it-works-heading">
-        <div className="container mx-auto px-4">
-          <h2 id="how-it-works-heading" className="section-title">How It Works</h2>
+      {/* 2. Comment ça Marche (How It Works) - يستخدم الخلفية الفاتحة (Background) مع Accent */}
+      <section className="section bg-background" aria-labelledby="how-it-works-heading">
+        <div className="container mx-auto px-4 max-w-7xl">
+          <h2 id="how-it-works-heading" className="section-title">Processus Simple en 3 Étapes</h2>
           <p className="section-subtitle">
-            Getting your package delivered has never been easier
+            Un processus optimisé pour une expérience client sans friction et efficace.
           </p>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16">
-            <div className="card text-center p-8 slide-in">
-              <div className="w-20 h-20 bg-accent rounded-full flex items-center justify-center mx-auto mb-6">
-                <span className="text-3xl font-bold text-dark">1</span>
+            <div className="card text-center p-8 slide-in delay-100 shadow-soft-lg">
+              <div className="w-20 h-20 bg-accent rounded-full flex-center mx-auto mb-6 shadow-soft">
+                <span className="text-3xl font-extrabold text-dark">1</span>
               </div>
-              <h3 className="text-2xl font-bold mb-4">Place Your Order</h3>
+              <h3 className="text-2xl font-bold mb-4 text-dark">Planification Intégrée</h3>
               <p className="text-gray-600">
-                Simply create an account and submit your delivery request with all the necessary details.
+                Créez et personnalisez votre envoi en quelques clics via notre plateforme intuitive.
               </p>
             </div>
             
-            <div className="card text-center p-8 slide-in delay-100">
-              <div className="w-20 h-20 bg-accent rounded-full flex items-center justify-center mx-auto mb-6">
-                <span className="text-3xl font-bold text-dark">2</span>
+            <div className="card text-center p-8 slide-in delay-200 shadow-soft-lg">
+              <div className="w-20 h-20 bg-accent rounded-full flex-center mx-auto mb-6 shadow-soft">
+                <span className="text-3xl font-extrabold text-dark">2</span>
               </div>
-              <h3 className="text-2xl font-bold mb-4">Assign Courier</h3>
+              <h3 className="text-2xl font-bold mb-4 text-dark">Affectation Automatisée</h3>
               <p className="text-gray-600">
-                Our system matches your package with the best available courier in your area.
+                Notre algorithme intelligent assigne instantanément le meilleur coursier disponible.
               </p>
             </div>
             
-            <div className="card text-center p-8 slide-in delay-200">
-              <div className="w-20 h-20 bg-accent rounded-full flex items-center justify-center mx-auto mb-6">
-                <span className="text-3xl font-bold text-dark">3</span>
+            <div className="card text-center p-8 slide-in delay-300 shadow-soft-lg">
+              <div className="w-20 h-20 bg-accent rounded-full flex-center mx-auto mb-6 shadow-soft">
+                <span className="text-3xl font-extrabold text-dark">3</span>
               </div>
-              <h3 className="text-2xl font-bold mb-4">Track & Receive</h3>
+              <h3 className="text-2xl font-bold mb-4 text-dark">Suivi et Confirmation</h3>
               <p className="text-gray-600">
-                Track your package in real-time and receive it safely at your destination.
+                Suivez votre colis en temps réel jusqu'à la confirmation de réception numérique.
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Services Preview */}
+      {/* 3. Aperçu des Services (Services Preview) - يستخدم Primary و Dark للأيقونات */}
       <section className="section" aria-labelledby="services-heading">
-        <div className="container mx-auto px-4">
-          <h2 id="services-heading" className="section-title">Our Services</h2>
+        <div className="container mx-auto px-4 max-w-7xl">
+          <h2 id="services-heading" className="section-title">Des Services Conçus Pour Vous</h2>
           <p className="section-subtitle">
-            We offer a wide range of delivery solutions for all your needs
+            Découvrez nos solutions personnalisées، allant de l'urgence au volume.
           </p>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-16">
-            <div className="card p-6 scale-in">
-              <div className="bg-accent w-16 h-16 rounded-lg flex items-center justify-center mb-4">
-                <svg className="w-8 h-8 text-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
-                </svg>
+            {/* Service 1: Urgence - Utilise Primary */}
+            <div className="card p-6 scale-in shadow-soft-lg">
+              <div className="bg-primary w-16 h-16 rounded-default flex-center mb-4 text-white">
+                <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
               </div>
-              <h3 className="text-xl font-bold mb-2">Same-Day Delivery</h3>
+              <h3 className="text-xl font-bold mb-2 text-dark">Urgence (Jour Même)</h3>
               <p className="text-gray-600">
-                Get your packages delivered within hours in major cities.
+                Livraison garantie en quelques heures pour vos documents et colis critiques.
               </p>
             </div>
             
-            <div className="card p-6 scale-in delay-100">
-              <div className="bg-accent w-16 h-16 rounded-lg flex items-center justify-center mb-4">
-                <svg className="w-8 h-8 text-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4 4 0 003 15z" />
-                </svg>
+            {/* Service 2: International - Utilise Dark */}
+            <div className="card p-6 scale-in delay-100 shadow-soft-lg">
+              <div className="bg-dark w-16 h-16 rounded-default flex-center mb-4 text-white">
+                <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
               </div>
-              <h3 className="text-xl font-bold mb-2">International Shipping</h3>
+              <h3 className="text-xl font-bold mb-2 text-dark">International</h3>
               <p className="text-gray-600">
-                Ship your packages worldwide with our reliable international service.
+                Couverture mondiale complète avec gestion douanière et assurance incluse.
               </p>
             </div>
             
-            <div className="card p-6 scale-in delay-200">
-              <div className="bg-accent w-16 h-16 rounded-lg flex items-center justify-center mb-4">
-                <svg className="w-8 h-8 text-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                </svg>
+            {/* Service 3: Fragile - Utilise Primary */}
+            <div className="card p-6 scale-in delay-200 shadow-soft-lg">
+              <div className="bg-primary w-16 h-16 rounded-default flex-center mb-4 text-white">
+                <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
               </div>
-              <h3 className="text-xl font-bold mb-2">Secure Packaging</h3>
+              <h3 className="text-xl font-bold mb-2 text-dark">Fragile et Spécialisé</h3>
               <p className="text-gray-600">
-                Professional packaging to ensure your items arrive safely.
+                Manutention experte pour les articles fragiles ou nécessitant un contrôle de température.
               </p>
             </div>
             
-            <div className="card p-6 scale-in delay-300">
-              <div className="bg-accent w-16 h-16 rounded-lg flex items-center justify-center mb-4">
-                <svg className="w-8 h-8 text-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                </svg>
+            {/* Service 4: B2B - Utilise Dark */}
+            <div className="card p-6 scale-in delay-300 shadow-soft-lg">
+              <div className="bg-dark w-16 h-16 rounded-default flex-center mb-4 text-white">
+                <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" /></svg>
               </div>
-              <h3 className="text-xl font-bold mb-2">Insurance Coverage</h3>
+              <h3 className="text-xl font-bold mb-2 text-dark">Solutions B2B</h3>
               <p className="text-gray-600">
-                Full insurance coverage for high-value items for peace of mind.
+                Tarifs de volume et intégration API dédiés pour les entreprises et l'e-commerce.
               </p>
             </div>
           </div>
           
-          <div className="text-center mt-12">
+          <div className="text-center mt-16">
             <Link 
               to="/services" 
-              className="btn btn-primary inline-flex items-center"
+              className="btn btn-secondary btn-lg inline-flex items-center font-semibold"
             >
-              View All Services
-              <svg className="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-              </svg>
+              Découvrir Toutes Nos Solutions
+              <svg className="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
             </Link>
           </div>
         </div>
       </section>
 
-      {/* Testimonials */}
-      <section className="section bg-accent" aria-labelledby="testimonials-heading">
-        <div className="container mx-auto px-4">
-          <h2 id="testimonials-heading" className="section-title">What Our Customers Say</h2>
-          <p className="section-subtitle">
-            Don't just take our word for it - hear from our satisfied customers
-          </p>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16">
-            <div className="card p-8 slide-in">
-              <div className="flex items-center mb-4">
-                <div className="w-12 h-12 bg-gray-300 rounded-full mr-4"></div>
-                <div>
-                  <h4 className="font-bold">Marie Dubois</h4>
-                  <p className="text-gray-600 text-sm">E-commerce Business Owner</p>
-                </div>
-              </div>
-              <p className="text-gray-700 italic">
-                "Delevrie has transformed our delivery process. Our customers love the fast and reliable service, and our business has grown significantly since partnering with them."
-              </p>
-              <div className="flex mt-4 text-yellow-400">
-                {[...Array(5)].map((_, i) => (
-                  <svg key={i} className="w-5 h-5 fill-current" viewBox="0 0 24 24">
-                    <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
-                  </svg>
-                ))}
-              </div>
-            </div>
-            
-            <div className="card p-8 slide-in delay-100">
-              <div className="flex items-center mb-4">
-                <div className="w-12 h-12 bg-gray-300 rounded-full mr-4"></div>
-                <div>
-                  <h4 className="font-bold">Jean Martin</h4>
-                  <p className="text-gray-600 text-sm">Restaurant Manager</p>
-                </div>
-              </div>
-              <p className="text-gray-700 italic">
-                "The food delivery service is exceptional. Our meals arrive hot and fresh every time. The couriers are professional and punctual. Highly recommended!"
-              </p>
-              <div className="flex mt-4 text-yellow-400">
-                {[...Array(5)].map((_, i) => (
-                  <svg key={i} className="w-5 h-5 fill-current" viewBox="0 0 24 24">
-                    <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
-                  </svg>
-                ))}
-              </div>
-            </div>
-            
-            <div className="card p-8 slide-in delay-200">
-              <div className="flex items-center mb-4">
-                <div className="w-12 h-12 bg-gray-300 rounded-full mr-4"></div>
-                <div>
-                  <h4 className="font-bold">Sophie Laurent</h4>
-                  <p className="text-gray-600 text-sm">Private Customer</p>
-                </div>
-              </div>
-              <p className="text-gray-700 italic">
-                "I've used many delivery services, but Delevrie stands out for their reliability and customer service. My packages always arrive on time and in perfect condition."
-              </p>
-              <div className="flex mt-4 text-yellow-400">
-                {[...Array(5)].map((_, i) => (
-                  <svg key={i} className="w-5 h-5 fill-current" viewBox="0 0 24 24">
-                    <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
-                  </svg>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="section bg-gradient-to-r from-primary to-secondary text-white" aria-labelledby="cta-heading">
-        <div className="container mx-auto px-4 text-center">
-          <h2 id="cta-heading" className="text-3xl md:text-4xl font-bold mb-6">Ready to Get Started?</h2>
-          <p className="text-xl mb-8 max-w-2xl mx-auto">
-            Join thousands of satisfied customers who trust us for their delivery needs.
+      {/* 4. Appel à l'Action Final (CTA) - يستخدم Dark Background */}
+      <section className="section bg-dark text-white" aria-labelledby="final-cta-heading">
+        <div className="container mx-auto px-4 max-w-7xl text-center">
+          <h2 id="final-cta-heading" className="text-3xl md:text-5xl font-bold mb-6">Boostez Votre Activité avec Delevrie</h2>
+          <p className="text-xl mb-8 max-w-2xl mx-auto text-gray-300 font-light">
+            Il est temps de passer à une logistique plus efficace et centrée sur l'utilisateur.
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
             <Link 
               to="/client/login" 
-              className="btn btn-primary text-lg px-8 py-4"
-              aria-label="Sign up as a client"
+              className="btn btn-primary btn-lg px-8 py-4 bg-secondary text-white hover:bg-orange-700 font-semibold shadow-soft-xl"
+              aria-label="S'inscrire en tant que client et commencer la livraison"
             >
-              Sign Up as Client
+              Ouvrir un Compte Client
             </Link>
             <Link 
               to="/livreur/login" 
-              className="btn bg-white text-primary hover:bg-accent text-lg px-8 py-4"
-              aria-label="Become a courier"
+              className="btn btn-outline btn-lg px-8 py-4 border-white text-white hover:bg-white hover:text-dark font-semibold"
+              aria-label="Devenir coursier et rejoindre notre équipe"
             >
-              Become a Courier
+              Devenir Coursier
             </Link>
           </div>
         </div>

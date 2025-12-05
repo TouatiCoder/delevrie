@@ -16,12 +16,14 @@ const ClientLoginPage: React.FC = () => {
   const validateForm = () => {
     const newErrors: Record<string, string> = {};
     
+    // Translation: 'Username is required'
     if (!username.trim()) {
-      newErrors.username = 'Username is required';
+      newErrors.username = 'Le nom d\'utilisateur est requis';
     }
     
+    // Translation: 'Password is required'
     if (!password) {
-      newErrors.password = 'Password is required';
+      newErrors.password = 'Le mot de passe est requis';
     }
     
     setErrors(newErrors);
@@ -45,10 +47,12 @@ const ClientLoginPage: React.FC = () => {
       if (login(username, password)) {
         navigate('/client');
       } else {
-        setErrors({ submit: 'Invalid credentials. Please try again.' });
+        // Translation: 'Invalid credentials. Please try again.'
+        setErrors({ submit: 'Identifiants invalides. Veuillez réessayer.' });
       }
     } catch (err) {
-      setErrors({ submit: 'An unexpected error occurred. Please try again.' });
+      // Translation: 'An unexpected error occurred. Please try again.'
+      setErrors({ submit: 'Une erreur inattendue est survenue. Veuillez réessayer.' });
     } finally {
       setIsLoading(false);
     }
@@ -59,7 +63,7 @@ const ClientLoginPage: React.FC = () => {
       <div className="max-w-md w-full space-y-8 p-10 bg-white rounded-xl shadow-lg fade-in">
         <div>
           <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-            Client Login
+            Connexion Client
           </h2>
         </div>
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
@@ -78,7 +82,7 @@ const ClientLoginPage: React.FC = () => {
             </div>
           )}
           <div className="space-y-4">
-            <FormField label="Username" error={errors.username} required>
+            <FormField label="Nom d'utilisateur" error={errors.username} required>
               <Input
                 id="username"
                 name="username"
@@ -87,7 +91,7 @@ const ClientLoginPage: React.FC = () => {
                 onChange={(e) => setUsername(e.target.value)}
                 error={errors.username}
                 success={!errors.username && username.trim().length > 0}
-                placeholder="Enter your username"
+                placeholder="Entrez votre nom d'utilisateur"
                 icon={(
                   <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
@@ -95,7 +99,7 @@ const ClientLoginPage: React.FC = () => {
                 )}
               />
             </FormField>
-            <FormField label="Password" error={errors.password} required>
+            <FormField label="Mot de passe" error={errors.password} required>
               <Input
                 id="password"
                 name="password"
@@ -104,7 +108,7 @@ const ClientLoginPage: React.FC = () => {
                 onChange={(e) => setPassword(e.target.value)}
                 error={errors.password}
                 success={!errors.password && password.length > 0}
-                placeholder="Enter your password"
+                placeholder="Entrez votre mot de passe"
                 icon={(
                   <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
@@ -122,12 +126,12 @@ const ClientLoginPage: React.FC = () => {
               disabled={isLoading}
               fullWidth
             >
-              Sign in
+              Se connecter
             </Button>
           </div>
           
           <div className="text-sm text-gray-600 text-center">
-            <p>Credentials: client / client123</p>
+            <p>Identifiants : client / client123</p>
           </div>
         </form>
       </div>

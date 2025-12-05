@@ -7,54 +7,36 @@ const Header: React.FC = () => {
   const menuRef = useRef<HTMLDivElement>(null);
   const location = useLocation();
 
-  // Handle scroll effect for header
+  // Gère l'effet de défilement (Sticky Header)
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 10);
-    };
-    
+    const handleScroll = () => { setScrolled(window.scrollY > 10); };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-
-  // Close menu when clicking outside
+  
+  // Gère la fermeture du menu au clic/échap
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
-        setIsMenuOpen(false);
-      }
+      if (menuRef.current && !menuRef.current.contains(event.target as Node)) setIsMenuOpen(false);
     };
-
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, []);
-
-  // Close menu when pressing Escape key
-  useEffect(() => {
     const handleEscape = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') {
-        setIsMenuOpen(false);
-      }
+      if (event.key === 'Escape') setIsMenuOpen(false);
     };
-
+    document.addEventListener('mousedown', handleClickOutside);
     document.addEventListener('keydown', handleEscape);
     return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
       document.removeEventListener('keydown', handleEscape);
     };
   }, []);
 
-  // Close menu when route changes
-  useEffect(() => {
-    setIsMenuOpen(false);
-  }, [location]);
+  useEffect(() => { setIsMenuOpen(false); }, [location]);
 
   const navItems = [
-    { name: 'Home', path: '/' },
+    { name: 'Accueil', path: '/' },
     { name: 'Services', path: '/services' },
-    { name: 'Pricing', path: '/pricing' },
-    { name: 'About', path: '/about' },
+    { name: 'Tarifs', path: '/pricing' },
+    { name: 'À Propos', path: '/about' },
     { name: 'Contact', path: '/contact' },
   ];
 
@@ -66,26 +48,26 @@ const Header: React.FC = () => {
 
   return (
     <header 
-      className={`fixed w-full top-0 z-50 transition-all duration-300 ${scrolled ? 'bg-white shadow-lg py-2' : 'bg-white/95 backdrop-blur-sm py-3'}`}
+      className={`fixed w-full top-0 z-50 transition-all duration-300 ${scrolled ? 'bg-white shadow-soft-lg py-2' : 'bg-white/95 backdrop-blur-sm py-3'}`}
       role="banner"
     >
-      <div className="container mx-auto px-4">
-        <div className="flex justify-between items-center">
+      <div className="container mx-auto px-4 max-w-7xl">
+        <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-2" aria-label="Delevrie Home">
-            <div className="bg-gradient-to-r from-blue-600 to-indigo-700 text-white font-bold text-xl w-10 h-10 rounded-full flex items-center justify-center shadow-md hover:shadow-lg transition-shadow duration-300" aria-hidden="true">
+          <Link to="/" className="flex items-center space-x-2" aria-label="Accueil Delevrie">
+            <div className="bg-dark text-white font-extrabold text-xl w-10 h-10 rounded-full flex-center shadow-soft hover:shadow-lg transition-all duration-300">
               D
             </div>
-            <span className="text-xl font-bold text-gray-800">Delevrie</span>
+            <span className="text-2xl font-bold text-dark tracking-tight">Delevrie</span>
           </Link>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center space-x-1" role="navigation" aria-label="Main navigation">
+          {/* Navigation Desktop: تم تغيير lg:flex إلى md:flex */}
+          <nav className="hidden **md:flex** items-center space-x-1" role="navigation" aria-label="Navigation principale">
             {navItems.map((item) => (
               <Link 
                 key={item.path}
                 to={item.path} 
-                className={`px-4 py-2 rounded-lg font-medium transition-all duration-200 ${location.pathname === item.path ? 'text-blue-600 bg-blue-50' : 'text-gray-600 hover:text-blue-600 hover:bg-gray-50'}`}
+                className={`px-4 py-2 rounded-lg font-medium transition-colors duration-200 text-base ${location.pathname === item.path ? 'text-primary bg-red-50 font-semibold' : 'text-dark hover:text-primary hover:bg-gray-50'}`}
                 aria-current={location.pathname === item.path ? 'page' : undefined}
               >
                 {item.name}
@@ -93,31 +75,31 @@ const Header: React.FC = () => {
             ))}
           </nav>
 
-          {/* Auth Buttons */}
-          <div className="hidden lg:flex items-center space-x-3">
+          {/* Boutons d'Action et Connexion: تم تغيير lg:flex إلى md:flex */}
+          <div className="hidden **md:flex** items-center space-x-3">
             {authItems.map((item) => (
               <Link 
                 key={item.path}
                 to={item.path} 
-                className="px-4 py-2 text-gray-600 hover:text-blue-600 font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 rounded-lg hover:bg-gray-50"
+                className="px-4 py-2 text-dark hover:text-secondary font-medium transition-colors hover:bg-gray-50 rounded-lg focus:ring-secondary"
               >
                 {item.name}
               </Link>
             ))}
             <Link 
               to="/client/login" 
-              className="px-5 py-2.5 bg-gradient-to-r from-blue-600 to-indigo-700 text-white font-medium rounded-lg hover:from-blue-700 hover:to-indigo-800 transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+              className="btn btn-primary px-5 py-2.5 font-semibold text-lg" 
             >
-              Get Started
+              Commencer
             </Link>
           </div>
 
-          {/* Mobile menu button */}
+          {/* Bouton Menu Mobile: تم تغيير lg:hidden إلى md:hidden */}
           <button 
-            className="lg:hidden text-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 rounded-md p-2 hover:bg-gray-100 transition-colors duration-200"
+            className="**md:hidden** text-dark focus:outline-none focus:ring-2 focus:ring-primary rounded-md p-2 hover:bg-gray-100 transition-colors duration-200"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-expanded={isMenuOpen}
-            aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+            aria-label={isMenuOpen ? "Fermer le menu" : "Ouvrir le menu"}
           >
             <svg className="h-6 w-6 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
               {isMenuOpen ? (
@@ -129,13 +111,13 @@ const Header: React.FC = () => {
           </button>
         </div>
 
-        {/* Mobile Navigation */}
+        {/* Navigation Mobile: تم تغيير lg:hidden إلى md:hidden */}
         <div 
           ref={menuRef} 
-          className={`lg:hidden transition-all duration-300 ease-in-out overflow-hidden ${isMenuOpen ? 'max-h-96 opacity-100 mt-4' : 'max-h-0 opacity-0'} bg-white rounded-xl shadow-xl border border-gray-100`}
+          className={`**md:hidden** transition-all duration-300 ease-in-out overflow-hidden ${isMenuOpen ? 'max-h-screen opacity-100 mt-4' : 'max-h-0 opacity-0'} bg-white rounded-xl shadow-soft-xl border border-gray-100`}
           role="dialog" 
           aria-modal="true" 
-          aria-label="Mobile navigation"
+          aria-label="Navigation mobile"
         >
           <div className="py-4">
             <div className="flex flex-col space-y-1 px-4">
@@ -143,7 +125,7 @@ const Header: React.FC = () => {
                 <Link 
                   key={item.path}
                   to={item.path} 
-                  className={`px-4 py-3 rounded-lg font-medium transition-colors ${location.pathname === item.path ? 'text-blue-600 bg-blue-50' : 'text-gray-600 hover:text-blue-600 hover:bg-gray-50'}`}
+                  className={`px-4 py-3 rounded-lg font-medium transition-colors text-base ${location.pathname === item.path ? 'text-primary bg-red-50' : 'text-dark hover:text-primary hover:bg-gray-50'}`}
                   onClick={() => setIsMenuOpen(false)}
                   aria-current={location.pathname === item.path ? 'page' : undefined}
                 >
@@ -159,7 +141,7 @@ const Header: React.FC = () => {
                 <Link 
                   key={item.path}
                   to={item.path} 
-                  className="px-4 py-3 text-gray-600 hover:text-blue-600 font-medium transition-colors hover:bg-gray-50 rounded-lg"
+                  className="px-4 py-3 text-dark hover:text-secondary font-medium transition-colors hover:bg-gray-50 rounded-lg"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   {item.name}
@@ -167,10 +149,10 @@ const Header: React.FC = () => {
               ))}
               <Link 
                 to="/client/login" 
-                className="px-4 py-3 bg-gradient-to-r from-blue-600 to-indigo-700 text-white font-medium rounded-lg hover:from-blue-700 hover:to-indigo-800 transition-all duration-300 text-center shadow-md hover:shadow-lg"
+                className="btn btn-primary px-4 py-3 text-center shadow-md hover:shadow-lg mt-4 font-semibold"
                 onClick={() => setIsMenuOpen(false)}
               >
-                Get Started
+                Commencer
               </Link>
             </div>
           </div>
